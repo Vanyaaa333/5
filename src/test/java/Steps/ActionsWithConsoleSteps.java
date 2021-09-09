@@ -3,6 +3,7 @@ package Steps;
 import Constants.ExpectedResultConstants;
 import Constants.ParameterConstants;
 import io.qameta.allure.Step;
+import lombok.extern.log4j.Log4j2;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.zeroturnaround.exec.ProcessExecutor;
@@ -13,7 +14,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeoutException;
 
-
+@Log4j2
 public class ActionsWithConsoleSteps {
 
     private final String[] programs = {"cmd", "/c","start","cmd.exe","/K","calc_div.exe"};
@@ -25,6 +26,7 @@ public class ActionsWithConsoleSteps {
 
     @DataProvider()
     public static Object[][] parametersPairs() {
+        log.info("Creating parameters pairs model");
         return new Object[][]{
                 {ParameterConstants.firstIntegerPositiveParameter,ParameterConstants.firstIntegerPositiveParameterName,
                         ParameterConstants.secondIntegerPositiveParameter, ParameterConstants.secondIntegerPositiveParameterName,
@@ -43,9 +45,10 @@ public class ActionsWithConsoleSteps {
     }
 
 
-    @Step("Open application in cmd , passing parameters, reading output")
+    @Step
     public ActionsWithConsoleSteps openApplicationAndPassingParameters(String firstParName, String firstParValue,String secondParName,String secondParValue)
             throws InterruptedException, TimeoutException, IOException {
+        log.info("Open application in cmd , passing parameters, reading output");
         parametersMap.put(firstParName,firstParValue);
         parametersMap.put(secondParName,secondParValue);
         processResult = new ProcessExecutor().command(programs).environment(parametersMap).readOutput(true).execute();
@@ -59,16 +62,18 @@ public class ActionsWithConsoleSteps {
         r.keyPress(KeyEvent.VK_ENTER);
         */
     }
-    @Step("Changing output type to UTF8 String")
+    @Step
     public String getOutputAsUTF8String(){
+        log.info("Changing output type to UTF8 String");
         /*
         Ответ вероятнее всего парсится , достается результат деления
          */
         return processResult.outputUTF8();
     }
 
-    @Step("Checking that result of division is right")
+    @Step
     public ActionsWithConsoleSteps isDivisionCorrect(String expectedResult){
+        log.info("Checking that result of division is right");
         Assert.assertEquals(getOutputAsUTF8String(),expectedResult,"Division isn't correct");
         return this;
     }

@@ -21,6 +21,7 @@
         <log4j-core.version>2.14.1</log4j-core.version>
         <jackson-dataformat-yaml.version>2.10.1</jackson-dataformat-yaml.version>
         <allure-maven.version>2.10.0</allure-maven.version>
+        <lombok.version>1.18.20</lombok.version>
     </properties>
 
     <build>
@@ -100,6 +101,12 @@
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-core</artifactId>
             <version>${log4j-core.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${lombok.version}</version>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
 

@@ -36,7 +36,7 @@ public class BaseTest {
 //                .openApplicationAndPassingParameters(firstParName,firstParValue,secondParName,secondParValue)
 //                .getOutputAsUTF8String();
 //        ac.isDivisionCorrect(expectedResult);
-        System.out.println("abc");
+        System.out.println("For checking allure and jenkins");
     }
 
 }
